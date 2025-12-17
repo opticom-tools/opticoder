@@ -43,7 +43,7 @@ default_ctx = st.session_state.get("context", {})
 client = Anthropic(api_key=st.secrets.get("ANTHROPIC_API_KEY", ""))
 
 # Streamlit page config
-st.set_page_config(page_title="OptiCoder", layout="wide")
+st.set_page_config(page_title="Opticom's OptiCoder", layout="wide")
 logo_path = os.path.join(os.path.dirname(__file__), "Opticom Logotype Blue_tagline_rgb.png")
 col_logo, col_title = st.columns([1, 4])
 with col_logo:
@@ -120,7 +120,7 @@ Questions:
 """
     prompt = (
         header +
-        "You are a senior qualitative research consultant. Generate exactly:\n"
+        "You are a senior qualitative research analyst and business strategy consultant. Generate exactly:\n"
         "- Executive Summary: 6–8 bullets, each 2–3 sentences\n"
         "- Narrative Summary: at least 400 words\n"
         "- Ideas Worth Exploring: 6–8 bullets, each 2–3 sentences\n"
@@ -232,3 +232,4 @@ Questions:
 # Sidebar context
 st.sidebar.header("Project Context")
 for k, v in ctx.items(): st.sidebar.markdown(f"**{k.replace('_',' ').title()}:** {v}")
+
