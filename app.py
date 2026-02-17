@@ -129,12 +129,14 @@ Questions:
         xml_template +
         f"\nRaw Responses:\n{raw}\n"
     )
-    with st.spinner("🤖 Claude is thinking…"):
-        response = client.messages.create(
-            model=CLAUDE_MODEL, max_tokens=MAX_CLAUDE_TOKENS,
-            temperature=0.3,
-            messages=[{"role":"user","content":prompt}]
-        ).content[0].text.strip()
+  with st.spinner("Testing model…"):
+    test = client.messages.create(
+        model="claude-3-5-sonnet-20241022",
+        max_tokens=50,
+        messages=[{"role": "user", "content": "Say hello"}]
+    )
+
+st.write(test.content[0].text)
 
     # XML parsing
     m = re.search(r"<Summary>[\s\S]*?</Summary>", response)
@@ -232,6 +234,7 @@ Questions:
 # Sidebar context
 st.sidebar.header("Project Context")
 for k, v in ctx.items(): st.sidebar.markdown(f"**{k.replace('_',' ').title()}:** {v}")
+
 
 
 
