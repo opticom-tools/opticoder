@@ -24,8 +24,8 @@ except ImportError:
     pdf_supported = False
 
 # Config
-CLAUDE_MODEL = "claude-sonnet-4-5-20250929"
-MAX_CLAUDE_TOKENS = 1500
+CLAUDE_MODEL = "claude-sonnet-4-5"
+MAX_CLAUDE_TOKENS = 4000
 PROJECTS_FILE = "projects.json"
 COST_PER_TOKEN = 0.00001  # USD per token
 
@@ -129,14 +129,12 @@ Questions:
         xml_template +
         f"\nRaw Responses:\n{raw}\n"
     )
-  with st.spinner("Testing model…"):
-    test = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
-        max_tokens=50,
-        messages=[{"role": "user", "content": "Say hello"}]
-    )
-
-st.write(test.content[0].text)
+    with st.spinner("🤖 Claude is thinking…"):
+        response = client.messages.create(
+            model=CLAUDE_MODEL, max_tokens=MAX_CLAUDE_TOKENS,
+            temperature=0.3,
+            messages=[{"role":"user","content":prompt}]
+        ).content[0].text.strip()
 
     # XML parsing
     m = re.search(r"<Summary>[\s\S]*?</Summary>", response)
@@ -234,10 +232,3 @@ st.write(test.content[0].text)
 # Sidebar context
 st.sidebar.header("Project Context")
 for k, v in ctx.items(): st.sidebar.markdown(f"**{k.replace('_',' ').title()}:** {v}")
-
-
-
-
-
-
-
