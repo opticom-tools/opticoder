@@ -24,7 +24,7 @@ except ImportError:
     pdf_supported = False
 
 # Config
-CLAUDE_MODEL = "claude-3-5-sonnet-20241022"
+CLAUDE_MODEL = "claude-sonnet-4-5"
 MAX_CLAUDE_TOKENS = 4000
 PROJECTS_FILE = "projects.json"
 COST_PER_TOKEN = 0.00001  # USD per token
@@ -232,5 +232,6 @@ Questions:
 # Sidebar context
 st.sidebar.header("Project Context")
 for k, v in ctx.items(): st.sidebar.markdown(f"**{k.replace('_',' ').title()}:** {v}")
+
 
 
